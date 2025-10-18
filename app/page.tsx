@@ -1,103 +1,108 @@
-import Image from "next/image";
+import Link from "next/link"
+import { Button } from "@/components/ui/button"
+import { Card } from "@/components/ui/card"
+import { Camera, Heart, Share2, Users } from "lucide-react"
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <main className="min-h-screen bg-background">
+      {/* Hero Section */}
+      <section className="relative overflow-hidden border-b border-border">
+        <div className="container mx-auto px-4 py-20 md:py-32">
+          <div className="mx-auto max-w-3xl text-center">
+            <h1 className="text-balance text-4xl font-bold tracking-tight text-foreground md:text-6xl lg:text-7xl">
+              Share Your Moments with the World
+            </h1>
+            <p className="mt-6 text-pretty text-lg leading-relaxed text-muted-foreground md:text-xl">
+              Capture, share, and discover beautiful photos from photographers around the globe. Join our community
+              today.
+            </p>
+            <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+              <Button asChild size="lg" className="w-full sm:w-auto">
+                <Link href="/register">Get Started</Link>
+              </Button>
+              <Button asChild size="lg" variant="outline" className="w-full sm:w-auto bg-transparent">
+                <Link href="/login">Sign In</Link>
+              </Button>
+            </div>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+      </section>
+
+      {/* Features Section */}
+      <section className="py-20 md:py-32">
+        <div className="container mx-auto px-4">
+          <div className="mx-auto max-w-2xl text-center">
+            <h2 className="text-balance text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+              Everything You Need to Share
+            </h2>
+            <p className="mt-4 text-pretty text-lg leading-relaxed text-muted-foreground">
+              Powerful features designed for photographers and photo enthusiasts
+            </p>
+          </div>
+
+          <div className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+            <Card className="p-6">
+              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+                <Camera className="h-6 w-6" />
+              </div>
+              <h3 className="mt-4 text-xl font-semibold text-card-foreground">Upload & Organize</h3>
+              <p className="mt-2 leading-relaxed text-muted-foreground">
+                Easily upload your photos and organize them into beautiful collections
+              </p>
+            </Card>
+
+            <Card className="p-6">
+              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+                <Share2 className="h-6 w-6" />
+              </div>
+              <h3 className="mt-4 text-xl font-semibold text-card-foreground">Share Instantly</h3>
+              <p className="mt-2 leading-relaxed text-muted-foreground">
+                Share your photos with friends, family, or the entire community
+              </p>
+            </Card>
+
+            <Card className="p-6">
+              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+                <Heart className="h-6 w-6" />
+              </div>
+              <h3 className="mt-4 text-xl font-semibold text-card-foreground">Like & Comment</h3>
+              <p className="mt-2 leading-relaxed text-muted-foreground">
+                Engage with the community through likes, comments, and reactions
+              </p>
+            </Card>
+
+            <Card className="p-6">
+              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+                <Users className="h-6 w-6" />
+              </div>
+              <h3 className="mt-4 text-xl font-semibold text-card-foreground">Follow Creators</h3>
+              <p className="mt-2 leading-relaxed text-muted-foreground">
+                Discover and follow talented photographers from around the world
+              </p>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="border-t border-border bg-muted/50 py-20 md:py-32">
+        <div className="container mx-auto px-4">
+          <div className="mx-auto max-w-2xl text-center">
+            <h2 className="text-balance text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+              Ready to Start Sharing?
+            </h2>
+            <p className="mt-4 text-pretty text-lg leading-relaxed text-muted-foreground">
+              Join thousands of photographers already sharing their work
+            </p>
+            <div className="mt-8">
+              <Button asChild size="lg">
+                <Link href="/register">Create Your Account</Link>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  )
 }
