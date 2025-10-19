@@ -2,7 +2,6 @@
 
 import type { User, AuthResponse } from "./types"
 
-// Auth state management
 export function setAuthToken(token: string) {
   if (typeof window !== "undefined") {
     localStorage.setItem("auth_token", token)
@@ -16,9 +15,23 @@ export function getAuthToken(): string | null {
   return null
 }
 
+export function setRefreshToken(token: string) {
+  if (typeof window !== "undefined") {
+    localStorage.setItem("refresh_token", token)
+  }
+}
+
+export function getRefreshToken(): string | null {
+  if (typeof window !== "undefined") {
+    return localStorage.getItem("refresh_token")
+  }
+  return null
+}
+
 export function removeAuthToken() {
   if (typeof window !== "undefined") {
     localStorage.removeItem("auth_token")
+    localStorage.removeItem("refresh_token")
     localStorage.removeItem("user")
   }
 }
@@ -44,12 +57,16 @@ export async function login(email: string, password: string): Promise<AuthRespon
   //   method: "POST",
   //   body: JSON.stringify({ email, password }),
   // })
+  // setAuthToken(response.accessToken)
+  // setRefreshToken(response.refreshToken)
+  // setUser(response.user)
 
   // Placeholder response
   await new Promise((resolve) => setTimeout(resolve, 1000))
 
   const mockResponse: AuthResponse = {
-    token: "mock_jwt_token_" + Date.now(),
+    accessToken: "mock_access_token_" + Date.now(),
+    refreshToken: "mock_refresh_token_" + Date.now(),
     user: {
       id: "user_123",
       username: email.split("@")[0],
@@ -58,7 +75,8 @@ export async function login(email: string, password: string): Promise<AuthRespon
     },
   }
 
-  setAuthToken(mockResponse.token)
+  setAuthToken(mockResponse.accessToken)
+  setRefreshToken(mockResponse.refreshToken)
   setUser(mockResponse.user)
 
   return mockResponse
@@ -70,12 +88,16 @@ export async function register(username: string, email: string, password: string
   //   method: "POST",
   //   body: JSON.stringify({ username, email, password }),
   // })
+  // setAuthToken(response.accessToken)
+  // setRefreshToken(response.refreshToken)
+  // setUser(response.user)
 
   // Placeholder response
   await new Promise((resolve) => setTimeout(resolve, 1000))
 
   const mockResponse: AuthResponse = {
-    token: "mock_jwt_token_" + Date.now(),
+    accessToken: "mock_access_token_" + Date.now(),
+    refreshToken: "mock_refresh_token_" + Date.now(),
     user: {
       id: "user_" + Date.now(),
       username,
@@ -84,7 +106,8 @@ export async function register(username: string, email: string, password: string
     },
   }
 
-  setAuthToken(mockResponse.token)
+  setAuthToken(mockResponse.accessToken)
+  setRefreshToken(mockResponse.refreshToken)
   setUser(mockResponse.user)
 
   return mockResponse

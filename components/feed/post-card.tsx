@@ -54,11 +54,20 @@ export function PostCard({ post }: PostCardProps) {
         </div>
       )}
 
-      {/* Image */}
+      {/* Image - Enhanced to handle Cloudinary URLs and external image sources */}
       {post.imageUrl && (
         <Link href={`/post/${post.id}`}>
-          <div className="relative aspect-square w-full cursor-pointer">
-            <Image src={post.imageUrl || "/placeholder.svg"} alt={post.caption} fill className="object-cover" />
+          <div className="relative aspect-square w-full cursor-pointer bg-muted">
+            <Image
+              src={post.imageUrl || "/placeholder.svg"}
+              alt={post.caption || "Post image"}
+              fill
+              className="object-cover"
+              priority={false}
+              onError={(e) => {
+                console.error("[v0] Image load error:", post.imageUrl)
+              }}
+            />
           </div>
         </Link>
       )}
@@ -71,7 +80,7 @@ export function PostCard({ post }: PostCardProps) {
           </Button>
           <span className="text-sm font-semibold">{likes.toLocaleString()}</span>
           <Button variant="ghost" size="sm" className="h-auto p-0 hover:bg-transparent" asChild>
-            <Link href={`/post/${post.id}`}>
+            <Link href={`/post/${post.id}/comments`}>
               <MessageCircle className="h-6 w-6" />
             </Link>
           </Button>

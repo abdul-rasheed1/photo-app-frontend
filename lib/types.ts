@@ -20,11 +20,13 @@ export interface Comment {
   id: string
   postId: string
   userId: string
+  username: string
   text: string
   createdAt: string
 }
 
 export interface AuthResponse {
-  token: string
+  accessToken: string
+  refreshToken: string
   user: User
 }

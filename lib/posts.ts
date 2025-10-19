@@ -9,7 +9,7 @@ const initialPosts: Post[] = [
     id: "1",
     userId: "user_456",
     caption: "Beautiful sunset at the beach 🌅",
-    imageUrl: "/sunset-beach-tranquil.png",
+    imageUrl: "https://images.unsplash.com/photo-1495567720989-cebdbdd97913?w=500&h=500&fit=crop",
     likes: 234,
     comments: 12,
     createdAt: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
@@ -18,7 +18,7 @@ const initialPosts: Post[] = [
     id: "2",
     userId: "user_789",
     caption: "Morning coffee and good vibes ☕",
-    imageUrl: "/coffee-cup.png",
+    imageUrl: "https://images.unsplash.com/photo-1559056199-641a0ac8b3f7?w=500&h=500&fit=crop",
     likes: 156,
     comments: 8,
     createdAt: new Date(Date.now() - 5 * 60 * 60 * 1000).toISOString(),
@@ -27,7 +27,7 @@ const initialPosts: Post[] = [
     id: "3",
     userId: "user_101",
     caption: "Exploring the city streets",
-    imageUrl: "/busy-city-street.png",
+    imageUrl: "https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=500&h=500&fit=crop",
     likes: 412,
     comments: 23,
     createdAt: new Date(Date.now() - 8 * 60 * 60 * 1000).toISOString(),
@@ -36,7 +36,7 @@ const initialPosts: Post[] = [
     id: "4",
     userId: "user_202",
     caption: "Nature's beauty never fails to amaze 🌿",
-    imageUrl: "/lush-forest.png",
+    imageUrl: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=500&h=500&fit=crop",
     likes: 567,
     comments: 34,
     createdAt: new Date(Date.now() - 12 * 60 * 60 * 1000).toISOString(),
@@ -76,6 +76,22 @@ export function createPost(post: Omit<Post, "id" | "createdAt">): Post {
 export function getPostById(id: string): Post | undefined {
   const allPosts = getAllPosts()
   return allPosts.find((post) => post.id === id)
+}
+
+export function deletePost(postId: string): void {
+  if (typeof window === "undefined") return
+
+  const allPosts = getAllPosts()
+  const filteredPosts = allPosts.filter((post) => post.id !== postId)
+  localStorage.setItem(POSTS_KEY, JSON.stringify(filteredPosts))
+
+  // Also delete associated comments
+  const stored = localStorage.getItem(COMMENTS_KEY)
+  if (stored) {
+    const allComments: Comment[] = JSON.parse(stored)
+    const filteredComments = allComments.filter((comment) => comment.postId !== postId)
+    localStorage.setItem(COMMENTS_KEY, JSON.stringify(filteredComments))
+  }
 }
 
 export function getPostComments(postId: string): Comment[] {

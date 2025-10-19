@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button"
 import { ArrowLeft } from "lucide-react"
 import { getPostById, getPostComments } from "@/lib/posts"
 import type { Post, Comment } from "@/lib/types"
-import { CommentsContainer } from "@/components/comments/comments-container"
+import { CommentsContainer } from "@/components/comments/comment-container"
 
 export default function CommentsPage() {
   const params = useParams()

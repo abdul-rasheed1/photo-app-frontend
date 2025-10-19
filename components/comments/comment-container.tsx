@@ -6,7 +6,7 @@ import { toast } from "sonner"
 import type { Comment } from "@/lib/types"
 import { getUser } from "@/lib/auth"
 import { addComment } from "@/lib/posts"
-import { CommentsList } from "./comments-list"
+import { CommentsList } from "./comment-list"
 import { CommentForm } from "./comment-form"
 
 interface CommentsContainerProps {
